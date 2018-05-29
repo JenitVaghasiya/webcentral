@@ -288,11 +288,11 @@ public static class CommonFunction
         return calculoalbaran;
     }
 
-    public static double? getStock(string dearticulo, int dealmacen)
+    public static decimal? getStock(string dearticulo, int dealmacen)
     {
-        double deinicio = 0;
-        double tostock = 0;
-        double Stock = 0;
+        decimal? deinicio = 0;
+        decimal? tostock = 0;
+        decimal? Stock = 0;
         if (dearticulo == "" || string.IsNullOrEmpty(dearticulo)) return null;
         if (dealmacen == 0)
         {
@@ -343,16 +343,13 @@ public static class CommonFunction
         public decimal? Factor { get; set; }
     }
 
-    public static double calcular(string dearticulo, int dealmacen)
+    public static decimal? calcular(string dearticulo, int dealmacen)
     {
-        double decantidad;
-        double defactor;
+        decimal? decantidad;
+        decimal? defactor;
         decimal? deinicio = 0;
-        DateTime HastaFecha;
         DateTime? adefecha;
         DateTime? adehora;
-        double tostock = 0;
-        int fact;
 
         var frr = @"SELECT rd.[Serie Regularizacion] SerieRegularizacion, rd.Auto, rd.[Auto Artículo] AutoArtículo, rd.Cantidad, rd.[Cantidad und pedido] Cantidadundpedido,
                     rd.factor, rd.Unidad, rd.Habían,  rd.Partida, rd.Fecha, rd.Hora, rd.Artículo, rd.rowguid, dbo.REGULARIZACIONES.[De Almacen] DeAlmacen
@@ -405,7 +402,7 @@ public static class CommonFunction
 
 
         pasonaval:
-
+        int fact;
         err = 0;
         frr = @"SELECT ORDENES_DET.[Serie Orden] SerieOrden, ORDENES_DET.[Auto Proveedor] AutoProveedor, ORDENES_DET.[Fecha Det] FechaDet, ORDENES_DET.[Hora graba] Horagraba,
                 ORDENES_DET.[Auto Artículo] AutoArtículo, ORDENES_DET.Cantidad, ORDENES_DET.Factor
@@ -417,34 +414,32 @@ public static class CommonFunction
         {
             if (adefecha == sor.FechaDet)
             {
-                if (sor.Horagraba < adehora) goto siguienteord;
+                if (sor.Horagraba < adehora) continue; ;
             }
+
+            if (sor.SerieOrden.IndexOf(" - ") > 0)
+            {
+                fact = -1;
+            }
+            else
+            {
+                fact = 1;
+            }
+            if (fact == -1)
+            {
+                if (string.IsNullOrEmpty(Convert.ToString(sor.AutoProveedor))) continue;
+            }
+            decantidad = sor.Cantidad * fact;
+            defactor = sor.Factor;
+            deinicio = deinicio - (decantidad);
+
+            frr = "SELECT Sum(PEDIDOS_DET.Cantidad) as totrep FROM PEDIDOS_DET";
+            frr = frr + " Where [Auto artículo] ='" + dearticulo + "' and [Almacen] ='" + dealmacen + "'";
+            frr = frr + " AND (([Fecha entrada] ='" + adefecha + "' AND ([hora] >'" + adehora + "' or [hora] is null)) OR ([Fecha entrada] >'" + adefecha + "'))";
+            total = GetList<decimal>(frr);
+            deinicio = deinicio + total.Sum(x => x);
         }
-        If InStr(1, sordenes("Serie Orden"), "-") > 0 Then fact = -1 Else fact = 1
-        If fact = -1 Then
-        If sordenes("Auto Proveedor") = "" Or IsNull(sordenes("Auto Proveedor")) Then GoTo siguienteord
-    End If
-    decantidad = sordenes("cantidad") * fact
-        defactor = sordenes("factor")
-        deinicio = deinicio - (decantidad)
-
-siguienteord:
-    sordenes.MoveNext
-Loop
-    sigui5:
-        sordenes.Close
-
-        fr = "SELECT Sum(PEDIDOS_DET.Cantidad) as totrep FROM PEDIDOS_DET"
-    fr = fr & " Where [Auto artículo] ='" & dearticulo & "' and [Almacen] ='" & dealmacen & "'"
-    fr = fr & " AND (([Fecha entrada] ='" & adefecha & "' AND ([hora] >'" & adehora & "' or [hora] is null)) OR ([Fecha entrada] >'" & adefecha & "'))"
-    spedidos.Open fr, CurrentProject.Connection, adOpenKeyset, adLockOptimistic
-    Do Until spedidos.EOF
-        deinicio = deinicio + Nzn(spedidos("totrep"))
-        spedidos.MoveNext
-Loop
-    spedidos.Close
-
-    Stock = deinicio
+        return deinicio;
     }
 
 }
