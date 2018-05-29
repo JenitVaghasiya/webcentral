@@ -1,0 +1,48 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Presupuestos.aspx.cs" Inherits="Presupuestos" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="Content" runat="Server">
+    <asp:ScriptManager ID="spmngr" runat="server" EnablePartialRendering="true"></asp:ScriptManager>
+    <asp:UpdatePanel runat="server" EnableViewState="true" ID="UpdatePanel" ClientIDMode="AutoID" ChildrenAsTriggers="true" RenderMode="Inline" UpdateMode="Always">
+        <ContentTemplate>
+            <div>
+                <div class="col-md-9">
+                    <dx:ASPxGridView ClientInstanceName="gridPresupuestosver"  Width="100%" ID="GridViewPresupuestosver" runat="server"
+                        KeyFieldName="AutoArtículo" AutoGenerateColumns="False"  EnableCallBacks="true">
+                        <SettingsBehavior AllowFocusedRow="true" AllowSelectByRowClick="true" AllowSelectSingleRowOnly="true" />
+                        <Styles Cell-CssClass="smallfont10size">
+                            <Cell Wrap="False" CssClass="smallfont10size"></Cell>
+                        </Styles>
+                        <SettingsDataSecurity AllowInsert="False" />
+                        <SettingsSearchPanel Visible="true" ColumnNames="SeriePresupuesto" ShowApplyButton="true" SearchInPreview="false" />
+                        <Columns>
+                            <dx:GridViewDataTextColumn FieldName="SeriePresupuesto" Caption="Presupuesto" Width="14">
+                                <Settings AllowAutoFilter="False"></Settings>
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="Desstatus" Caption="Status" Width="14">
+                                <Settings AllowAutoFilter="False"></Settings>
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="Fecha" Caption="Fecha" Width="14">
+                                <Settings AllowAutoFilter="False"></Settings>
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="Descripción" Caption="Descripción" Width="14">
+                                <Settings AllowAutoFilter="False"></Settings>
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="Desobra" Caption="Obra" Width="14">
+                                <Settings AllowAutoFilter="False"></Settings>
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="Albarán" Caption="Albarán" Width="14">
+                                <Settings AllowAutoFilter="False"></Settings>
+                            </dx:GridViewDataTextColumn>
+                        </Columns>
+                        <Settings ShowGroupPanel="false" VerticalScrollBarMode="Visible" VerticalScrollableHeight="0" />
+                        <SettingsPager Mode="EndlessPaging" PageSize="10" />
+                        <ClientSideEvents Init="OnInit" EndCallback="OnEndCallback" />
+                    </dx:ASPxGridView>
+                    <dx:ASPxGlobalEvents ID="ge" runat="server">
+                        <ClientSideEvents ControlsInitialized="OnControlsInitialized" />
+                    </dx:ASPxGlobalEvents>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+</asp:Content>

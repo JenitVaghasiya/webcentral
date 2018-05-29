@@ -1,0 +1,140 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>Web Central</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="/Scripts/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
+    <style type="text/css">
+        .smallfont13size {
+            font-size: 13px !important;
+        }
+
+        .smallfont10size {
+            font-size: 9px !important;
+        }
+
+        .active .smallfont10size {
+            background-color: #BF4E6A !important;
+            color: white;
+        }
+
+        .select {
+            cursor: pointer;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .dxgvFooter_MaterialCompact {
+            font-size: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .searchtab {
+                padding-top: 45px;
+            }
+        }
+
+        .dxgvControl_MaterialCompact .dxgvTable_MaterialCompact .dxgvFocusedRow_MaterialCompact, .dxgvControl_MaterialCompact .dxgvTable_MaterialCompact .dxgvFocusedRow_MaterialCompact.dxgvDataRowHover_MaterialCompact {
+            background-color: rgba(224, 82, 76, 0.72);
+            color: white;
+        }
+
+        .dxgvHeader_MaterialCompact {
+            background-color: #35B86B;
+        }
+
+            .dxgvHeader_MaterialCompact a, .dxgvHeader_MaterialCompact a.dxgvCommandColumnItem_MaterialCompact, .dxgvHeader_MaterialCompact a.dxgvCommandColumnItem_MaterialCompact.dxbDisabled_MaterialCompact, .dxgvCommandColumn_MaterialCompact a, .dxgvCommandColumn_MaterialCompact a.dxgvCommandColumnItem_MaterialCompact.dxbDisabled_MaterialCompact {
+                color: white !important;
+            }
+    </style>
+
+   <%-- <script>
+
+        $(document).ready(function () {
+
+            var Height = $(window).height();
+            var Width = $(window).width();
+
+
+            if (Width < 1200) {
+                $("#HDFIsMobile").val("1");   
+            }
+
+        });
+
+
+    </script>--%>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <form runat="server" id="masterform">
+     
+<%--<asp:hiddenfield runat="server" ID="HDFIsMobile" Value="0" ClientIDMode="Static"></asp:hiddenfield>--%>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topMenu">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/" style="padding-top: 7px;">
+                        <img src="/image/logocentral.jpg" height="40" width="40" class="img-responsive" alt="Responsive image" /></a>&nbsp;
+                    <ul class="navbar-nav nav nav-pills" runat="server" id="uluser" visible="false">
+                        <li role="presentation" id="LogingMenu_DXI0_"><a href="#" id="userName" runat="server"></a></li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" id="topMenu">
+                    <dx:BootstrapMenu ID="TopMenu" runat="server" ShowPopOutImages="True" ItemAutoWidth="false" ClientInstanceName="topMenu">
+                        <CssClasses Control="top-menu" Menu="navbar-nav" />
+                        <Items>
+                            <dx:BootstrapMenuItem Text="Inicio" Name="Inicio" NavigateUrl="/">
+                            </dx:BootstrapMenuItem>
+                            <dx:BootstrapMenuItem Text="Acceso" Name="Acceso" NavigateUrl="Account/Login.aspx">
+                            </dx:BootstrapMenuItem>
+                            <dx:BootstrapMenuItem Text="Salir" Name="Salir" NavigateUrl="Account/Logout.aspx">
+                            </dx:BootstrapMenuItem>
+                        </Items>
+                    </dx:BootstrapMenu>
+                    <dx:BootstrapMenu ID="LogingMenu" runat="server" ShowPopOutImages="True" ItemAutoWidth="false" ClientInstanceName="topMenu">
+                        <CssClasses Control="top-menu" Menu="navbar-nav" />
+                        <Items>
+                            <dx:BootstrapMenuItem Text="INICIO" Name="Inicio" NavigateUrl="/">
+                            </dx:BootstrapMenuItem>
+                            <dx:BootstrapMenuItem Text="PRECIOS" Name="PRECIOS" NavigateUrl="precios.aspx">
+                            </dx:BootstrapMenuItem>
+                            <dx:BootstrapMenuItem Text="PRESUPUESTOS" Name="PRESUPUESTOS" NavigateUrl="PresupuestosList.aspx">
+                            </dx:BootstrapMenuItem>
+                            <dx:BootstrapMenuItem Text="FACTURAS" Name="FACTURAS" NavigateUrl="Facturas.aspx">
+                            </dx:BootstrapMenuItem>
+                            <dx:BootstrapMenuItem Text="ALBARANES" Name="ALBARANES" NavigateUrl="Albaranes.aspx">
+                            </dx:BootstrapMenuItem>
+                            <dx:BootstrapMenuItem runat="server" Text="SALIR" Name="Login" NavigateUrl="~/Account/Logout.aspx">
+                            </dx:BootstrapMenuItem>
+                        </Items>
+                    </dx:BootstrapMenu>
+                </div>
+        </nav>
+
+        <div>
+            <asp:ContentPlaceHolder ID="Content" runat="server">
+            </asp:ContentPlaceHolder>
+            <br />
+        </div>
+    </form>
+</body>
+</html>

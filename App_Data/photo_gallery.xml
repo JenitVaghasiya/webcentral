@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<items>
+  <item Id="0" Text="(Athens) Academy of Athens" ImageUrl="1.jpg" MediumImageUrl="1.jpg" ThumbnailUrl="1.jpg" Rating="4" />
+  <item Id="1" Text="(Athens) Academy of Athens" ImageUrl="2.jpg" MediumImageUrl="2.jpg" ThumbnailUrl="2.jpg" Rating="4" />
+  <item Id="2" Text="(Athens) Academy of Athens" ImageUrl="3.jpg" MediumImageUrl="3.jpg" ThumbnailUrl="3.jpg" Rating="4" />
+  <item Id="3" Text="(Athens) Academy of Athens" ImageUrl="4.jpg" MediumImageUrl="4.jpg" ThumbnailUrl="4.jpg" Rating="4" />
+  <item Id="4" Text="(Athens) Academy of Athens" ImageUrl="5.jpg" MediumImageUrl="5.jpg" ThumbnailUrl="5.jpg" Rating="4" />
+</items>
