@@ -291,12 +291,12 @@
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="Desg" Width="29%" VisibleIndex="3">
+                                <dx:GridViewDataTextColumn FieldName="Desg" Width="27%" VisibleIndex="3">
                                     <BatchEditModifiedCellStyle CssClass="smallfont10size"></BatchEditModifiedCellStyle>
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataSpinEditColumn FieldName="Cantidad" VisibleIndex="4" Width="5%">
+                                <dx:GridViewDataSpinEditColumn FieldName="Cantidad" VisibleIndex="4" Width="6%">
                                     <PropertiesSpinEdit DisplayFormatString="n" DisplayFormatInEditMode="true" MinValue="0" MaxValue="10000">
                                         <ValidationSettings Display="Dynamic" RequiredField-IsRequired="true" />
                                         <Style CssClass="smallfont10size"></Style>
@@ -318,7 +318,7 @@
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="PercenImpuesto" Caption="Igic" VisibleIndex="8" Width="5%" PropertiesTextEdit-DisplayFormatString="{0:n}">
+                                <dx:GridViewDataTextColumn FieldName="PercenImpuesto" Caption="Igic" VisibleIndex="8" Width="4%" PropertiesTextEdit-DisplayFormatString="{0:n}">
                                     <BatchEditModifiedCellStyle CssClass="smallfont10size"></BatchEditModifiedCellStyle>
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
@@ -333,7 +333,7 @@
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="Importe" Caption="Total PVP" UnboundType="Decimal" VisibleIndex="11" Width="5%" PropertiesTextEdit-DisplayFormatString="{0:n}">
+                                <dx:GridViewDataTextColumn FieldName="Importe" Caption="Total PVP" UnboundType="Decimal" VisibleIndex="11" Width="6%" PropertiesTextEdit-DisplayFormatString="{0:n}">
                                     <BatchEditModifiedCellStyle CssClass="smallfont10size"></BatchEditModifiedCellStyle>
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
