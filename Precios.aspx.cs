@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Web.Services;
 using System.Web.UI;
+using Newtonsoft.Json;
 
 public partial class Precios : BasePage
 {
@@ -776,5 +778,11 @@ public partial class Precios : BasePage
         catch (Exception ex)
         {
         }
+    }
+
+    [WebMethod]
+    public static string getStock(string articulo)
+    {
+        return JsonConvert.SerializeObject(articulo);
     }
 }
