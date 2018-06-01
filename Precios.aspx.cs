@@ -251,21 +251,28 @@ public partial class Precios : BasePage
         double PrecioIgic = Convert.ToDouble(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "PrecioIgic") == null ? 0 : GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "PrecioIgic"));
         int Cantidad = Convert.ToInt32(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Cantidad"));
         double NetoIgic = Convert.ToDouble(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "NetoIgic") == null ? 0 : GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "NetoIgic"));
+        var PercenImpuesto = Convert.ToDouble(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "PercenImpuesto") == null ? 0 : GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "PercenImpuesto"));
+        var Precio = Convert.ToDouble(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Precio") == null ? 0 : GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Precio"));
+        var Dto = Convert.ToDouble(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Dto") == null ? 0 : GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Dto"));
 
-        if (e.Column.FieldName == "Importe")
+        if (e.Column.FieldName == "Importe") // Total PVP
         {
-            e.Value = Math.Round(PrecioIgic * Cantidad, 2);
+            // e.Value = Math.Round(PrecioIgic * Cantidad, 2); // old code
+            e.Value = Math.Round(Precio * Cantidad * (1 + PercenImpuesto / 100), 2);
         }
-        else if (e.Column.FieldName == "ImporteNeto")
+        else if (e.Column.FieldName == "ImporteNeto") // Total Neto
         {
-            e.Value = Math.Round(NetoIgic * Cantidad, 2);
+            // e.Value = Math.Round(NetoIgic * Cantidad, 2); //old code
+            e.Value = Math.Round(Precio * Cantidad * (1 + PercenImpuesto / 100) * (1 - Dto / 100), 2);
         }
-        else if (e.Column.FieldName == "ImpNetoDtopp")
+        else if (e.Column.FieldName == "ImpNetoDtopp") // Total Neto-DtoPP
         {
-            var neto = Convert.ToDouble(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Neto") == null ? 0 : GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Neto"));
-            var PercenImpuesto = Convert.ToDouble(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "PercenImpuesto") == null ? 0 : GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "PercenImpuesto"));
-            double newimpor = neto * (1 - Cliente.Dtopp / 100);
-            e.Value = Math.Round(newimpor * (1 + PercenImpuesto / 100), 2);
+            //var neto = Convert.ToDouble(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Neto") == null ? 0 : GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Neto"));
+            //double newimpor = neto * (1 - Cliente.Dtopp / 100);
+            //e.Value = Math.Round(newimpor * (1 + PercenImpuesto / 100), 2);
+
+            var VarDtoPP = Math.Round(Cantidad * Precio * (1 - Dto / 100) * (Cliente.Dtopp / 100), 2);
+            e.Value = Math.Round(Cantidad * Precio * (1 - Dto / 100) * (1 + PercenImpuesto / 100), 2) - VarDtoPP;
         }
         else if (e.Column.FieldName == "beneficio")
         {
