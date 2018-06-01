@@ -333,17 +333,17 @@
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="Importe" Caption="Importe" UnboundType="Decimal" VisibleIndex="11" Width="5%" PropertiesTextEdit-DisplayFormatString="{0:n}">
+                                <dx:GridViewDataTextColumn FieldName="Importe" Caption="Total PVP" UnboundType="Decimal" VisibleIndex="11" Width="5%" PropertiesTextEdit-DisplayFormatString="{0:n}">
                                     <BatchEditModifiedCellStyle CssClass="smallfont10size"></BatchEditModifiedCellStyle>
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="ImporteNeto" Caption="Importe Neto" UnboundType="Decimal" VisibleIndex="12" Width="7%" PropertiesTextEdit-DisplayFormatString="{0:n}">
+                                <dx:GridViewDataTextColumn FieldName="ImporteNeto" Caption="Total Neto" UnboundType="Decimal" VisibleIndex="12" Width="7%" PropertiesTextEdit-DisplayFormatString="{0:n}">
                                     <BatchEditModifiedCellStyle CssClass="smallfont10size"></BatchEditModifiedCellStyle>
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="ImpNetoDtopp" Caption="Imp.Neto.Dtopp" UnboundType="Decimal" VisibleIndex="12" Width="10%" PropertiesTextEdit-DisplayFormatString="{0:n}">
+                                <dx:GridViewDataTextColumn FieldName="ImpNetoDtopp" Caption="Total Neto-DtoPP" UnboundType="Decimal" VisibleIndex="12" Width="10%" PropertiesTextEdit-DisplayFormatString="{0:n}">
                                     <BatchEditModifiedCellStyle CssClass="smallfont10size"></BatchEditModifiedCellStyle>
                                     <Settings AllowAutoFilter="False"></Settings>
                                     <EditFormSettings Visible="False" />
