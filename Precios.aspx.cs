@@ -793,8 +793,8 @@ public partial class Precios : BasePage
     }
 
     [WebMethod]
-    public static string getStock(string articulo)
+    public static decimal? getstocks(string dearticulo, int dealmacen)
     {
-        return JsonConvert.SerializeObject(articulo);
+        return CommonFunction.getStock(dearticulo, dealmacen);
     }
 }

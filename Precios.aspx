@@ -137,94 +137,117 @@
                     e.processOnServer = false;
 
                     if (articleclicked == true) {
-                         //if (s.cellFocusHelper != undefined && s.cellFocusHelper.focusedCellInfo != undefined && s.cellFocusHelper.focusedCellInfo.columnIndex == 1) {
-                            if (s.GetFocusedCell() != null && s.GetFocusedCell().column.fieldName == "EditorAuto") {
-                               s.SetFocusedCell(2);
-                              articleclicked = false;
-                                GridViewPresupuestoActual.GetRowValues(GridViewPresupuestoActual.GetFocusedRowIndex(), 'EditorAuto', GetGridViewPresupuestoActualFocusedRowIndex);
-                            }
-                        }
-
-                        //if (s.cellFocusHelper == undefined || (s.cellFocusHelper.focusedCellInfo != undefined && s.cellFocusHelper.focusedCellInfo.columnIndex != 1)) {
-                        if (s.GetFocusedCell() == null || s.GetFocusedCell().column.fieldName != "EditorAuto") {
-                            s.SetFocusedRowIndex(s.focusedRowIndex);
-                            s.MakeRowVisible(s.focusedRowIndex);
-                            delete s.focusedRowIndex;
-                            delete e.visibleIndex;
+                        //if (s.cellFocusHelper != undefined && s.cellFocusHelper.focusedCellInfo != undefined && s.cellFocusHelper.focusedCellInfo.columnIndex == 1) {
+                        if (s.GetFocusedCell() != null && s.GetFocusedCell().column.fieldName == "EditorAuto") {
+                            s.SetFocusedCell(2);
+                            articleclicked = false;
+                            GridViewPresupuestoActual.GetRowValues(GridViewPresupuestoActual.GetFocusedRowIndex(), 'EditorAuto', GetGridViewPresupuestoActualFocusedRowIndex);
                         }
                     }
 
-                    function GetGridViewPresupuestoActualFocusedRowIndex(value) {
-                        if (value != null) {
-                            showHTMLEditor(value);
-                        }
-                        return false;
-                    }
-
-                    function OnRowFocus(s, e) {
-                        $("#showlblfamilia").hide();
-                        $("#linkfamiliaphoto").hide();
-                        var visibleIndex = e.visibleIndex;
-                        e.processOnServer = false;
-                        s.SetFocusedRowIndex(visibleIndex);
-                        s.MakeRowVisible(visibleIndex);
+                    //if (s.cellFocusHelper == undefined || (s.cellFocusHelper.focusedCellInfo != undefined && s.cellFocusHelper.focusedCellInfo.columnIndex != 1)) {
+                    if (s.GetFocusedCell() == null || s.GetFocusedCell().column.fieldName != "EditorAuto") {
+                        s.SetFocusedRowIndex(s.focusedRowIndex);
+                        s.MakeRowVisible(s.focusedRowIndex);
+                        delete s.focusedRowIndex;
                         delete e.visibleIndex;
-                        gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'AutoFamilia;FamiliaDesc;FamiliaFoto', OnGetRowValues);
                     }
+                }
 
-                    function OnGetRowValues(values) {
-
-                        lblfamilia.SetText("");
-                        if (values != null && values != '' && values != "" && values != undefined && values.length > 0) {
-                            if (values[0] != null && values[0] != '' && values[0] != "" && values[0] != undefined && values[0] > 0) {
-                                if (values[1] != null && values[1] != '' && values[1] != "" && values[1] != undefined) {
-                                    $("#showlblfamilia").show();
-                                    lblfamilia.SetText(values[1]);
-                                }
-
-                                if (values[2] != null && values[2] != '' && values[2] != "" && values[2] != undefined && values[2] > 0) {
-                                    $("#linkfamiliaphoto").show();
-                                }
-                            }
-                        }
-                    }
-
-                    function linkfamiliaphotoClick() {
-                        gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'FamiliaFoto', openHTMLEditor);
-                    }
-
-                    function openHTMLEditor(value) {
+                function GetGridViewPresupuestoActualFocusedRowIndex(value) {
+                    if (value != null) {
                         showHTMLEditor(value);
                     }
+                    return false;
+                }
 
-                    function showHTMLEditor(Auto) {
-                        pcHTMLEditor.Hide();
-                        var normalheight = document.documentElement.clientHeight - 100;
-                        var pcHTMLEditorPreviewIFrame = document.getElementById("pcHTMLEditorPreviewIFrame");
-                        pcHTMLEditorPreviewIFrame.style["height"] = "" + normalheight + "px";
-                        $("[id$=_hdnfoto]").val(Auto);
+                function OnRowFocus(s, e) {
+                    $("#showlblfamilia").hide();
+                    $("#linkfamiliaphoto").hide();
+                    var visibleIndex = e.visibleIndex;
+                    e.processOnServer = false;
+                    s.SetFocusedRowIndex(visibleIndex);
+                    s.MakeRowVisible(visibleIndex);
+                    delete e.visibleIndex;
+                    gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'AutoFamilia;FamiliaDesc;FamiliaFoto', OnGetRowValues);
+                    gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'AutoArtículo', showstock);
+                }
 
-                        pcHTMLEditorPreviewIFrame.innerHTML = "";
-                        pcHTMLEditorPreviewIFrame.src = "editor.aspx?id=" + Auto;
+                function OnGetRowValues(values) {
 
-                        pcHTMLEditor.Show();
-                        return false;
+                    lblfamilia.SetText("");
+                    if (values != null && values != '' && values != "" && values != undefined && values.length > 0) {
+                        if (values[0] != null && values[0] != '' && values[0] != "" && values[0] != undefined && values[0] > 0) {
+                            if (values[1] != null && values[1] != '' && values[1] != "" && values[1] != undefined) {
+                                $("#showlblfamilia").show();
+                                lblfamilia.SetText(values[1]);
+                            }
+
+                            if (values[2] != null && values[2] != '' && values[2] != "" && values[2] != undefined && values[2] > 0) {
+                                $("#linkfamiliaphoto").show();
+                            }
+                        }
                     }
+                }
 
-                    function showfullscreen() {
-                        htmlEditor.SetHeight($(document).height());
-                    }
-
-                    $(document).ready(function () {
-                        var pcHTMLEditorPreviewIFrame = document.getElementById("pcHTMLEditorPreviewIFrame");
-                        pcHTMLEditorPreviewIFrame.innerHTML = "";
+                function showstock(value) {
+                    
+                    $.each([1, 3, 8], function (index, indexData) {
+                        debugger
+                        $.ajax(
+                            {
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                url: '/precios.aspx/getstocks',
+                                data: "{'dearticulo':'" + value + "','dealmacen':'" + indexData + "'}",
+                                dataType: "json",
+                                success: function (response) {
+                                    debugger
+                                    alert("success");
+                                },
+                                error: function (response) {
+                                    alert("error");
+                                }
+                            });
                     });
+                }
 
-                    function OnSelectAll(s, e) {
-                        gridViewGroupFamily.ApplySearchPanelFilter();
-                        gridViewArtículo.ApplySearchPanelFilter();
-                        return true;
-                    }
+                function linkfamiliaphotoClick() {
+                    gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'FamiliaFoto', openHTMLEditor);
+                }
+
+                function openHTMLEditor(value) {
+                    showHTMLEditor(value);
+                }
+
+                function showHTMLEditor(Auto) {
+                    pcHTMLEditor.Hide();
+                    var normalheight = document.documentElement.clientHeight - 100;
+                    var pcHTMLEditorPreviewIFrame = document.getElementById("pcHTMLEditorPreviewIFrame");
+                    pcHTMLEditorPreviewIFrame.style["height"] = "" + normalheight + "px";
+                    $("[id$=_hdnfoto]").val(Auto);
+
+                    pcHTMLEditorPreviewIFrame.innerHTML = "";
+                    pcHTMLEditorPreviewIFrame.src = "editor.aspx?id=" + Auto;
+
+                    pcHTMLEditor.Show();
+                    return false;
+                }
+
+                function showfullscreen() {
+                    htmlEditor.SetHeight($(document).height());
+                }
+
+                $(document).ready(function () {
+                    var pcHTMLEditorPreviewIFrame = document.getElementById("pcHTMLEditorPreviewIFrame");
+                    pcHTMLEditorPreviewIFrame.innerHTML = "";
+                });
+
+                function OnSelectAll(s, e) {
+                    gridViewGroupFamily.ApplySearchPanelFilter();
+                    gridViewArtículo.ApplySearchPanelFilter();
+                    return true;
+                }
             </script>
 
             <div class="">
