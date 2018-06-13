@@ -265,16 +265,28 @@ public partial class Precios : BasePage
         else if (e.Column.FieldName == "ImporteNeto") // Total Neto
         {
             // e.Value = Math.Round(NetoIgic * Cantidad, 2); //old code
-            e.Value = Math.Round(Precio * Cantidad * (1 + PercenImpuesto / 100) * (1 - Dto / 100), 2);
+            //e.Value = Math.Round(Precio * Cantidad * (1 + PercenImpuesto / 100) * (1 - Dto / 100), 2);
+            double dtoval = 1;
+            if (Dto > 0)
+                dtoval = (1 - Dto / 100);
+
+            e.Value = Math.Round(Precio * Cantidad * (1 + PercenImpuesto / 100) * dtoval, 2);
         }
         else if (e.Column.FieldName == "ImpNetoDtopp") // Total Neto-DtoPP
         {
             //var neto = Convert.ToDouble(GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Neto") == null ? 0 : GridViewPresupuestoActual.GetRowValues(e.ListSourceRowIndex, "Neto"));
             //double newimpor = neto * (1 - Cliente.Dtopp / 100);
             //e.Value = Math.Round(newimpor * (1 + PercenImpuesto / 100), 2);
+            double dtoval = 1;
+            if (Dto > 0)
+                dtoval = (1 - Dto / 100);
 
-            var VarDtoPP = Math.Round(Cantidad * Precio * (1 - Dto / 100) * (Cliente.Dtopp / 100), 2);
-            e.Value = Math.Round(Cantidad * Precio * (1 - Dto / 100) * (1 + PercenImpuesto / 100), 2) - VarDtoPP;
+            double dtoppval = 1;
+            if (Cliente.Dtopp > 0)
+                dtoppval = Cliente.Dtopp;
+
+            var VarDtoPP = Math.Round(Cantidad * Precio * dtoval * dtoppval, 2);
+            e.Value = Math.Round(Cantidad * Precio * dtoval * (1 + PercenImpuesto / 100), 2) - VarDtoPP;
         }
         else if (e.Column.FieldName == "beneficio")
         {
