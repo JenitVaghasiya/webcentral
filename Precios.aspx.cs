@@ -282,8 +282,7 @@ public partial class Precios : BasePage
                 dtoval = (1 - Dto / 100);
 
             double dtoppval = 1;
-            if (Cliente.Dtopp > 0)
-                dtoppval = Cliente.Dtopp;
+            dtoppval = Cliente.Dtopp;
 
             var VarDtoPP = Math.Round(Cantidad * Precio * dtoval * dtoppval, 2);
             e.Value = Math.Round(Cantidad * Precio * dtoval * (1 + PercenImpuesto / 100), 2) - VarDtoPP;
