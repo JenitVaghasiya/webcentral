@@ -23,9 +23,9 @@ public partial class Account_Login : Page
          //   if(cliente >0)
             {
                 Session["User"] = cliente;
-                if (cliente.ToString () == "908795") Session["Vendedor"] = true;
-                if (cliente.ToString() == "908798") Session["Vendedor"] = true;
-                if (cliente.ToString() == "908799") Session["Vendedor"] = true;
+                if (cliente.AutoCliente.ToString () == "908795") Session["Vendedor"] = true;
+                if (cliente.AutoCliente.ToString() == "908798") Session["Vendedor"] = true;
+                if (cliente.AutoCliente.ToString() == "908799") Session["Vendedor"] = true;
                 Response.Redirect("/default.aspx");
             }
             else

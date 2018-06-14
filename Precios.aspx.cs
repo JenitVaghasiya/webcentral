@@ -24,36 +24,7 @@ public partial class Precios : BasePage
                 Response.Redirect("/Account/login.aspx");
             }
         }
-        Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "SetSize();", true);
-        ////ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "SetSize();", true);
-
-        //var width = Convert.ToInt32(FrmWidth.Value);
-        //var height = Convert.ToInt32(FrmHeight.Value);
-
-
-        //if (width < 1200)
-        //{
-        //    IsMobile = true;
-        //}
-        //if (IsMobile)
-        //{
-        //    if (Page.IsCallback)
-        //    {
-        //        ASPxWebControl.RedirectOnCallback("/mobile/precios.aspx");
-        //    }
-        //    else
-        //    {
-        //        if (!string.IsNullOrEmpty(Request.QueryString["sp"]))
-        //        {
-        //            Response.Redirect("/mobile/precios.aspx?sp=" + Request.QueryString["sp"]);
-        //        }
-        //        else
-        //        {
-        //            Response.Redirect("/mobile/precios.aspx");
-        //        }
-        //    }
-
-        //}
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "$(document).ready(function () { SetSize();});", true);
 
         var preciosGroupRepository = new PreciosGroupRepository();
         int grupo = 0;
@@ -799,7 +770,7 @@ public partial class Precios : BasePage
         bool.TryParse(Convert.ToString(HttpContext.Current.Session["Vendedor"]), out isVendedor);
         if (isVendedor)
         {
-            // return CommonFunction.getStock(dearticulo, dealmacen);
+            return CommonFunction.getStock(dearticulo, dealmacen);
         }
         return 0;
     }

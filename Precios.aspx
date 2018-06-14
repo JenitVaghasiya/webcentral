@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Precios.aspx.cs" Inherits="Precios"  UICulture="es-ES" Culture="es-ES"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Precios.aspx.cs" Inherits="Precios" UICulture="es-ES" Culture="es-ES" %>
 
 <%@ Register Assembly="DevExpress.Web.ASPxHtmlEditor.v17.1, Version=17.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxHtmlEditor" TagPrefix="dx" %>
 
@@ -171,7 +171,11 @@
                     s.MakeRowVisible(visibleIndex);
                     delete e.visibleIndex;
                     gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'AutoFamilia;FamiliaDesc;FamiliaFoto', OnGetRowValues);
-                    //gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'AutoArtículo', showstock);
+                    $("#divstock").hide();
+                    var isVendedor = '<%=Session["Vendedor"] %>';
+                    if(isVendedor == 'True'){
+                        gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'AutoArtículo', showstock);
+                    }
                 }
 
                 function OnGetRowValues(values) {
@@ -194,7 +198,6 @@
                 function showstock(value) {
 
                     $.each([1, 3, 8], function (index, indexData) {
-                        debugger
                         $.ajax(
                             {
                                 type: "POST",
@@ -203,11 +206,19 @@
                                 data: "{'dearticulo':'" + value + "','dealmacen':'" + indexData + "'}",
                                 dataType: "json",
                                 success: function (response) {
-                                    debugger
-                                    alert("success");
+                                    if(indexData == 1) {
+                                        $("#lblstock1").text(response.d);
+                                    }
+                                    else if(indexData == 3) {
+                                        $("#lblstock2").text(response.d);
+                                    }
+                                    else if(indexData == 8){
+                                        $("#lblstock3").text(response.d);
+                                        $("#divstock").show();
+                                    }
                                 },
                                 error: function (response) {
-                                    alert("error");
+
                                 }
                             });
                     });
@@ -442,30 +453,29 @@
                     <div class="col-md-9">
                         <div class="col-md-12" style="margin-bottom: 5px; margin-top: 5px;">
                             <div class="row">
-                            <div class="col-md-5">
-                            </div>
-                            <div class="col-md-7  col-sm-12">
-                                <div class="col-md-6  col-sm-12">
-                                    <div id="showlblfamilia" style="display: none; font-size: 10px">
-                                        <b>Familia : </b>
-                                        <a id="linkfamiliaphoto" href="#" onclick="linkfamiliaphotoClick(); return false;" class="select" style="display: ;">(Foto)</a>
-                                        <dx:ASPxLabel ClientInstanceName="lblfamilia" ID="lblfamilia" runat="server"></dx:ASPxLabel>
+                                <div class="col-md-5" style="padding-left:20px !important;">
+                                    <div id="divstock" style="display:none; font-size: 12px;">
+                                    Stock almacen 1 = <label id="lblstock1"></label>;
+                                        Stock almacen 3  = <label id="lblstock2"></label>;
+                                        Stock almacen 8 = <label id="lblstock3"></label>;
+                                </div>
+                                </div>
+                                <div class="col-md-7 col-sm-12">
+                                    <div class="col-md-6  col-sm-12">
+                                        <div id="showlblfamilia" style="display: none; font-size: 10px;">
+                                            <b>Familia : </b>
+                                            <a id="linkfamiliaphoto" href="#" onclick="linkfamiliaphotoClick(); return false;" class="select" style="display: none;">(Foto)</a>
+                                            <dx:ASPxLabel ClientInstanceName="lblfamilia" ID="lblfamilia" runat="server"></dx:ASPxLabel>
 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6  col-sm-12">
+                                        <dx:ASPxButton ClientInstanceName="btnselectAllFamili" ID="btnselectAllFamili" runat="server" Text="Buscar en todos los artículos" AutoPostBack="false" OnClick="btnsearchArticulo_Click">
+                                            <ClientSideEvents Click="OnSelectAll" />
+                                        </dx:ASPxButton>
                                     </div>
                                 </div>
-                                <div class="col-md-6  col-sm-12">
-                                    <dx:ASPxButton ClientInstanceName="btnselectAllFamili" ID="btnselectAllFamili" runat="server" Text="Buscar en todos los artículos" AutoPostBack="false" OnClick="btnsearchArticulo_Click">
-                                        <ClientSideEvents Click="OnSelectAll" />
-                                    </dx:ASPxButton>
-                                </div>
                             </div>
-                                </div>
-                             <div class="row">
-                                <div class="col-md-5">
-                                </div>
-                                 <div class="col-md-7  col-sm-12">
-                                      </div>
-                             </div>
                         </div>
                         <div class="col-md-12">
                             <dx:ASPxGridView SettingsDetail-AllowOnlyOneMasterRowExpanded="true" ClientInstanceName="gridViewArtículo" Width="100%" ID="GridViewArtículo"
