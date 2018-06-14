@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Services;
 using System.Web.UI;
 using Newtonsoft.Json;
+using System.Web;
 
 public partial class Precios : BasePage
 {
@@ -791,10 +792,15 @@ public partial class Precios : BasePage
         }
     }
 
-    [WebMethod]
+    [System.Web.Services.WebMethod(EnableSession = true)]
     public static decimal? getstocks(string dearticulo, int dealmacen)
     {
-        // return CommonFunction.getStock(dearticulo, dealmacen);
+        var isVendedor = false;
+        bool.TryParse(Convert.ToString(HttpContext.Current.Session["Vendedor"]), out isVendedor);
+        if (isVendedor)
+        {
+            // return CommonFunction.getStock(dearticulo, dealmacen);
+        }
         return 0;
     }
 }

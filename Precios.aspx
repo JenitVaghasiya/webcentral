@@ -3,6 +3,7 @@
 <%@ Register Assembly="DevExpress.Web.ASPxHtmlEditor.v17.1, Version=17.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxHtmlEditor" TagPrefix="dx" %>
 
 
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
     <script>
         $(function () {
@@ -191,7 +192,7 @@
                 }
 
                 function showstock(value) {
-                    
+
                     $.each([1, 3, 8], function (index, indexData) {
                         debugger
                         $.ajax(
@@ -440,6 +441,7 @@
                     </div>
                     <div class="col-md-9">
                         <div class="col-md-12" style="margin-bottom: 5px; margin-top: 5px;">
+                            <div class="row">
                             <div class="col-md-5">
                             </div>
                             <div class="col-md-7  col-sm-12">
@@ -457,6 +459,13 @@
                                     </dx:ASPxButton>
                                 </div>
                             </div>
+                                </div>
+                             <div class="row">
+                                <div class="col-md-5">
+                                </div>
+                                 <div class="col-md-7  col-sm-12">
+                                      </div>
+                             </div>
                         </div>
                         <div class="col-md-12">
                             <dx:ASPxGridView SettingsDetail-AllowOnlyOneMasterRowExpanded="true" ClientInstanceName="gridViewArtículo" Width="100%" ID="GridViewArtículo"
