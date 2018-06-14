@@ -370,21 +370,21 @@ public static class CommonFunction
             adehora = Convert.ToDateTime("08:01:00");
         }
 
-        frr = "SELECT SUM(REPOSICIONES_DET.Cantidad) as totrep FROM  dbo.REPOSICIONES_DET INNER JOIN dbo.REPOSICIONES ON dbo.REPOSICIONES_DET.[Serie Reposicion] = dbo.REPOSICIONES.[Serie Reposicion]";
+        frr = "SELECT ISNULL(SUM(REPOSICIONES_DET.Cantidad),0) as totrep FROM  dbo.REPOSICIONES_DET INNER JOIN dbo.REPOSICIONES ON dbo.REPOSICIONES_DET.[Serie Reposicion] = dbo.REPOSICIONES.[Serie Reposicion]";
         frr = frr + " WHERE REPOSICIONES_DET.[Auto artículo] ='" + dearticulo + "' AND REPOSICIONES.[De Almacen] = '" + dealmacen + "'";
         frr = frr + " AND ((REPOSICIONES_DET.[Fecha Salida] ='" + adefecha + "' AND REPOSICIONES_DET.[hora salida] >'" + adehora + "') OR (REPOSICIONES_DET.[Fecha Salida] >'" + adefecha + "'))";
         var total = GetList<decimal>(frr);
         deinicio = deinicio - total.Sum(x => x);
 
 
-        frr = "SELECT SUM(REPOSICIONES_DET.Cantidad) as totrep FROM  dbo.REPOSICIONES_DET INNER JOIN dbo.REPOSICIONES ON dbo.REPOSICIONES_DET.[Serie Reposicion] = dbo.REPOSICIONES.[Serie Reposicion]";
+        frr = "SELECT  ISNULL(SUM(REPOSICIONES_DET.Cantidad),0) as totrep FROM  dbo.REPOSICIONES_DET INNER JOIN dbo.REPOSICIONES ON dbo.REPOSICIONES_DET.[Serie Reposicion] = dbo.REPOSICIONES.[Serie Reposicion]";
         frr = frr + " WHERE REPOSICIONES_DET.[Auto artículo] ='" + dearticulo + "' AND REPOSICIONES.[A Almacen] = '" + dealmacen + "'";
         frr = frr + " AND ((REPOSICIONES_DET.[fecha entrada] ='" + adefecha + "' AND REPOSICIONES_DET.[hora entrada] >'" + adehora + "') OR (REPOSICIONES_DET.[fecha entrada] >'" + adefecha + "'))";
         total = GetList<decimal>(frr);
         deinicio = deinicio + total.Sum(x => x);
 
 
-        frr = "SELECT SUM(cantidad) as totrep FROM HERRAMIENTAS";
+        frr = "SELECT  ISNULL(SUM(cantidad),0) as totrep FROM HERRAMIENTAS";
         frr = frr + " WHERE [Auto artículo] ='" + dearticulo + "'";
         frr = frr + " AND (([Fecha] ='" + adefecha + "' AND [hora] >'" + adehora + "') OR ([Fecha] >'" + adefecha + "'))";
         total = GetList<decimal>(frr);
@@ -394,7 +394,7 @@ public static class CommonFunction
         { goto pasonaval; }
 
         var err = 0;
-        frr = "SELECT Sum(ALB_D.Cantidad) as totrep FROM  dbo.ALB_D INNER JOIN dbo.ALB ON dbo.ALB_D.[Serie Albaran] = dbo.ALB.[Serie Albaran]";
+        frr = "SELECT  ISNULL(Sum(ALB_D.Cantidad),0) as totrep FROM  dbo.ALB_D INNER JOIN dbo.ALB ON dbo.ALB_D.[Serie Albaran] = dbo.ALB.[Serie Albaran]";
         frr = frr + " WHERE (ALB.[Albaran de entrega] = 0 or ALB.[Albaran de entrega] IS NULL) and ALB_D.[Auto artículo] ='" + dearticulo + "' and ALB_D.[Almacen] ='" + dealmacen + "'";
         frr = frr + " AND ((ALB.[Fecha] ='" + adefecha + "' AND ALB_D.[hora creación] >'" + adehora + "') OR (ALB.[Fecha] >'" + adefecha + "'))";
         total = GetList<decimal>(frr);

@@ -795,6 +795,7 @@ public partial class Precios : BasePage
     [WebMethod]
     public static decimal? getstocks(string dearticulo, int dealmacen)
     {
-        return CommonFunction.getStock(dearticulo, dealmacen);
+        // return CommonFunction.getStock(dearticulo, dealmacen);
+        return 0;
     }
 }

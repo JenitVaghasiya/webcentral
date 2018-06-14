@@ -170,7 +170,7 @@
                     s.MakeRowVisible(visibleIndex);
                     delete e.visibleIndex;
                     gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'AutoFamilia;FamiliaDesc;FamiliaFoto', OnGetRowValues);
-                    gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'AutoArtículo', showstock);
+                    //gridViewArtículo.GetRowValues(gridViewArtículo.GetFocusedRowIndex(), 'AutoArtículo', showstock);
                 }
 
                 function OnGetRowValues(values) {
