@@ -24,9 +24,7 @@ public partial class ClienteList : System.Web.UI.Page
 
         var client = (Clientes)Session["User"];
         string escliente = client.Código;
-        if (escliente != "908795") return;
-        if (escliente != "908798") return;
-        if (escliente != "908799") return;
+        if (!(escliente == "908795" || escliente == "908798" || escliente == "908799")) return;
         gridViewClient.DataSource = ClientesRepository.GetClientList();
         gridViewClient.DataBind();
     }
