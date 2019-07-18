@@ -165,8 +165,10 @@
                                 <Settings AllowAutoFilter="False"></Settings>
                             </dx:GridViewDataTextColumn>
                         </Columns>
-                        <Settings ShowGroupPanel="false" VerticalScrollBarMode="Auto" VerticalScrollableHeight="200" />
-                        <SettingsPager Mode="ShowPager" PageSize="10" />
+
+                            <Settings ShowStatusBar="Visible" VerticalScrollBarMode="Auto" VerticalScrollableHeight="180" ShowGroupPanel="false" ShowFooter="true" ShowFilterRowMenu="true" />
+                            <SettingsPager PageSize="300" Mode="EndlessPaging"></SettingsPager>
+
                         <ClientSideEvents Init="OnInit" />
                     </dx:ASPxGridView>
 
@@ -185,7 +187,7 @@
                         <SettingsDataSecurity AllowInsert="False" />
                         <SettingsSearchPanel Visible="false" />
                         <Settings ShowGroupPanel="false" VerticalScrollBarMode="Auto" VerticalScrollableHeight="200" ShowFooter="true" />
-                        <SettingsPager Mode="EndlessPaging" PageSize="10" />
+                        <SettingsPager Mode="EndlessPaging" PageSize="1000" />
                         <ClientSideEvents Init="OnInit" />
                         <Columns>
                             <dx:GridViewDataTextColumn FieldName="editorFoto" Caption="Foto" Width="7%">

@@ -16,7 +16,7 @@ public class FamiliasRepository
             try
             {
                 dbConnection.Open();
-                string query = "SELECT [Auto familia] As Autofamilia, Descripción, [Oden Catalogo] AS OdenCatalogo, Grupo, [Articulo que tiene las fotos] AS AutoEditor FROM FAMILIAS WHERE Descripción <>''";
+                string query = "SELECT [Auto familia] As Autofamilia, Familia, Descripción, [Oden Catalogo] AS OdenCatalogo, Grupo, [Articulo que tiene las fotos] AS AutoEditor FROM FAMILIAS WHERE Descripción <>''";
                 if (Id > 0)
                 {
                     query += " and [Grupo] = " + Id + "";

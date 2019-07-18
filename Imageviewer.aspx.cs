@@ -34,9 +34,8 @@ public partial class Imageviewer : System.Web.UI.Page
               string date = string.IsNullOrWhiteSpace(Request.QueryString["date"]) ? "0" : Request.QueryString["date"];
              month = Request.QueryString["month"].PadLeft(2, '0');
              date = Request.QueryString["date"].PadLeft(2, '0');
-            string path = "\\Image\\factor2010\\albaranes\\Dropbox\\" + year.Substring(year.Length - 2) + "\\" + month + "\\" + date + "\\";
-
-            var cliente = (Clientes)Session["User"];
+           string path = "\\Dropbox\\" + year.Substring(year.Length - 2) + "\\" + month + "\\" + date + "\\";
+           var cliente = (Clientes)Session["User"];
 
             if (AlbaranRepository.CheckAlbaranosverIdforImage(val, cliente.AutoCliente) > 0)
             {

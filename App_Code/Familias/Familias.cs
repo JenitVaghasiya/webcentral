@@ -12,6 +12,8 @@ public class Familias
 
     public string Descripción { get; set; }
 
+    public string Familia { get; set; }
+
     public string OdenCatalogo { get; set; }
 
     public int Grupo { get; set; }

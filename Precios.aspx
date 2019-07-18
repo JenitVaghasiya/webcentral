@@ -583,18 +583,25 @@
                         <dx:ASPxGridView ClientInstanceName="gridViewGroupFamily" Width="100%" ID="GridViewGroupFamily" runat="server" KeyFieldName="Autofamilia" AutoGenerateColumns="False" SettingsBehavior-ProcessSelectionChangedOnServer="true" EnableTheming="true" OnSelectionChanged="GridViewGroupFamily_SelectionChanged" EnableCallBacks="false">
                             <SettingsLoadingPanel Mode="ShowAsPopup" />
 
-                            <SettingsBehavior AllowFocusedRow="true" AllowSelectByRowClick="true" AllowSelectSingleRowOnly="true" />
-                            <SettingsSearchPanel Visible="True" />
+                            <SettingsBehavior FilterRowMode="Auto" AllowFocusedRow="true" AllowSelectByRowClick="true" AllowSelectSingleRowOnly="true" />
+                            <SettingsSearchPanel Visible="false" />
+                            <Settings ShowFilterRow="true" ShowFilterRowMenu="false"/>
                             <Styles Cell-CssClass="smallfont11size"></Styles>
                             <Columns>
                                 <dx:GridViewDataTextColumn FieldName="AutoEditor" Caption="Foto" Width="14%">
                                     <EditFormSettings Visible="False" />
+                                    <Settings ShowFilterRowMenu="False" AllowAutoFilter="False"/>
                                     <DataItemTemplate>
                                         <dx:ASPxHyperLink ID="linkfamiliphoto" runat="server" Text="Foto" OnInit="linkfamiliphoto_Init" CssClass="select textdecoration">
                                         </dx:ASPxHyperLink>
                                     </DataItemTemplate>
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="Descripción" Caption="Familia">
+                                <dx:GridViewDataTextColumn FieldName="Familia" Caption="Familia"  Width="14%">
+                                    <Settings ShowFilterRowMenu="False" AllowAutoFilter="True" AutoFilterCondition="Equals"/>
+                                    <BatchEditModifiedCellStyle CssClass="smallfont11size"></BatchEditModifiedCellStyle>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn FieldName="Descripción" Caption="Descripción">
+                                    <Settings ShowFilterRowMenu="False" AllowAutoFilter="True"/>
                                     <BatchEditModifiedCellStyle CssClass="smallfont11size"></BatchEditModifiedCellStyle>
                                 </dx:GridViewDataTextColumn>
                             </Columns>
